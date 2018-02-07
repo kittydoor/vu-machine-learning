@@ -1,0 +1,3 @@
+[submodule "pbloem-ml"]
+	path = pbloem-ml
+	url = git@github.com:pbloem/machine-learning.git
