@@ -1,1 +1,2 @@
-jupyter notebook pbloem-ml/worksheets
+source venv/bin/activate;
+jupyter notebook pbloem-ml/worksheets;
