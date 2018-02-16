@@ -12,3 +12,15 @@ SimpleNN v0.1:
   - m scalars
 - Output:
   - n scalars between 0 and 1
+- classify()
+- regress()
+
+Trainer v0.1:
+- Parameters:
+  1 - nn
+  2 - learning rate
+  3 - training data
+  4 - batch size
+  5 - test data
+- train()
+- test()
