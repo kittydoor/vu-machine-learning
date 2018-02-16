@@ -11,12 +11,18 @@ class SNN:
                 )
         self._biases = np.random.randn(self._out_layer_n)
     
-    def classify(inputs):
-        pass 
-
-    def sigmoid(x):
+    def sigmoid(self, x):
         y = 1 / (1 + np.exp(-x))
         return y
+
+    def classify(self, inputs):
+        return self.sigmoid(
+                self._weights.dot(inputs) + self._biases
+                )
+
+    def descend(self):
+        pass
+
 
 def train():
     pass
