@@ -1,0 +1,14 @@
+SimpleNN v0.1:
+- Parameters:
+  1 - Input layer size
+  2 - Output layer size
+  3* - Initial weight matrix
+  3* - Seed
+  3* - Empty for rand
+  4* - Initial bias matrix
+  4* - Seed
+  4* - Empty for rand
+- Input:
+  - m scalars
+- Output:
+  - n scalars between 0 and 1
