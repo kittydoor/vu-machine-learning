@@ -106,3 +106,4 @@ publish
 *.swp
 *.pyc
 venv
+tf-models

@@ -1,4 +1,4 @@
-.PHONY: papers clean
+.PHONY: all clean
 
 PUBLISH_DIR := ../publish
 BUILD_DIR := ../.build
