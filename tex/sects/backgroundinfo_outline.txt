@@ -1,0 +1,41 @@
+Background Info
+>Machine Learning
+>>Algorithms that are trained over a certain data set,
+^ to be able to classify or regress into
+^ different classes or predictions
+
+>Neural Networks
+>>Introduction to Neural Networks
+^ includes comparison to animal neurons,
+general idea of electrical pulses,
+each neuron has multiple inputs of different weights,
+one output that branches off into multiple neurons,
+network of neurons
+etc etc.
+
+>>Perceptron vs Neurons
+>>>Sigmoid function 
+>>>Alternatives
+
+>>Concept of Layers
+>>>Input Layer
+>>>>Raw Data vs Features?
+>>>Output Layer
+>>>>Mapping of output to semantics
+^ e.g. handwritten digit recognition,
+^ one output in total vs per class output and confidence
+>>>Hidden Layers
+
+>>Basic Flow of Classification
+>>>Deep Down It's All Linear Algebra
+
+>>Basic Flow of Training?
+>>>Loss Function
+>>>>Mean Square Error
+>>>>Alternatives
+>>>Backwards Propogation
+>>>>Gradient Descent as Modern Standard
+
+
+>Types of Neural Networks
+? (e.g. cnn, rcnn, lstm...etc.)
