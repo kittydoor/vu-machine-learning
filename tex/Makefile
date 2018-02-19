@@ -6,8 +6,8 @@ TEX_DIR := .
 #SRC_DIR := ../src
 TEX_FILES := $(wildcard $(TEX_DIR)/sects/*/*.tex)
 CC := xelatex
-FLAGS := -shell-escape -output-directory=$(BUILD_DIR)
-
+FLAGS := -interaction=nonstopmode -halt-on-error -output-directory=$(BUILD_DIR)
+# -shell-escape
 all: $(PUBLISH_DIR)/doc.pdf
 
 $(PUBLISH_DIR)/doc.pdf: $(TEX_DIR)/doc.tex $(TEX_FILES)
