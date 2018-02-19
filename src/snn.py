@@ -21,20 +21,20 @@ class SNN:
                 )
 
     def descend(self, inputs, actual, expected):
-        def derivative_of_sigmoid(x):
-            return sigmoid(x) * (1 - sigmoid(x))
-
-        def gradient_vector_biases(actual, expected):
-            return (2 * (actual - expected)).dot(actual).dot(1-actual)
-
-        def gradient_vector_weights(inputs, actual, expected):
-            return [ layer for layer in weights ].dot().dot()
-
-        def shift_weights():
-            pass
-
         pass
 
+class GradientDescent:
+    def derivative_of_sigmoid(x):
+        return sigmoid(x) * (1 - sigmoid(x))
+
+    def gradient_vector_biases(actual, expected):
+        return (2 * (actual - expected)).dot(actual).dot(1-actual)
+
+    def gradient_vector_weights(inputs, actual, expected):
+        return [ layer for layer in weights ].dot().dot()
+
+    def shift_weights():
+        pass
 
 def train():
     pass
