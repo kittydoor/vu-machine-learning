@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.6"
+install:
+  - pip install -r requirements.txt
+addons:
+  apt:
+    packages:
+    - texlive-base
+    - texlive-xetex
+script:
+  - make
+notifications:
+  email:
+    recipients:
+    - kittydoordev@gmail.com
+git:
+  depth: false
+  submodules: false
+before_deploy:
+  - git config --local user.name "Katherine Door"
+  - git config --local user.email "kittydoordev@gmail.com"
+  - git tag "doc-$(git log --format=%h -1).pdf"
