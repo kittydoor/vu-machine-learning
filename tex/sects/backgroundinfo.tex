@@ -1,1 +1,45 @@
 \section{Background Info}
+
+Machine Learning is a branch of Artificial intelligence based on the idea that systems can learn from data, identify patterns and make decisions using those patterns.
+Machine Learning uses algorithms to "learn" from a given  (training) sample of data.
+Then you use another sample (test sample) to determine the accuracy of the trained algorithms.
+The higher the accuracy, the better the model will preform to more and more real life data.
+
+One branch of Machine Learning (ML) is the Neural Networks (NN).
+Neural networks are biologically inspired ML programs.
+They are modelled after the neurons in the brains of animals.
+As to how the NN works, a neuron (artificial though) receives the inputs and starts some operations on the input.
+Next, the neuron sends the output to the other neurons (they have to be connected).
+This system has three layers: Input Layer, Hidden Layers, and Output Layer.
+In the first layer the training observations are given to the neurons.
+In the Hidden Layers, which are located between input- and output layers, the system tries to analysis the relationships involved in data.
+In these layers system will weight the nodes that are found to be more predictive of the outcome more heavily.
+
+There are many types of Neural Networks.
+One specific type is the Perceptron.
+It is a mathematical model of the biological neuron.
+This model uses an algorithm for binary classifiers, as well as a type of linear classifier (it makes it's prediction based on a linear model, combining a set of weights with the feature vector).
+Normal Perceptrons use linear activation functions.
+When they use three or more layers, the Perceptrion is called a Multilayer Perceptron (MLP).
+In this case, each node is a neuron that uses nonlinear activation functions.
+The MLP uses the technique backpropogation for training,
+This technique calculates the gradient that is needed to calculate the weights which are used in the network.
+The nonlinear activation functions in MLP usually follow the shape of the sigmoid function.
+This is a mathematical function (logistical) with an "S" shaped curve, which has the following formulation:
+
+\begin{equation*}
+  \centering
+  S(x)=\frac{1}{1+e^{-x}}
+\end{equation*}
+
+
+Mean Squared Error measures the average of squares of the errors.
+The errors are defined as the difference between the real value of data points and the estimated value.
+This measurement shows the quality of the regression.
+Still there are many others measurements which can be used for quality of the regression and the estimated values.
+Mean Percentage Error,  Mean Absolute Percentage Error and Root Mean Squared Error are some of the other common quality-measurements.
+Let $\hat(Y)$ be a vector of $n$ predictions, and $Y$ is the vector of real values then the MSE is as follows:
+
+\begin{equation*}
+  MSE= \frac{1}{n} \sum_{i=1}^{n}(Y_{i}-\hat{Y}_{i})^{2}
+\end{equation*}
