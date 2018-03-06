@@ -1,7 +1,7 @@
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-from dnn import *
+from deep_nn import *
 
 F_ARGS = 2
 NETWORK_SIZES = (2, 3, 3, 1)
@@ -19,7 +19,7 @@ def generate_data(n):
     """ Generate n pairs x, y to be used as training and test data """
     return [(x, f(*x)) for x in np.random.random([n, F_ARGS])]
 
-network = DNN(NETWORK_SIZES)
+network = DeepNN(NETWORK_SIZES)
 training_data = generate_data(TRAINING_N)
 test_data = generate_data(TEST_N)
 network.sgd(training_data, EPOCHS, BATCH_SIZE, ETA, test_data)

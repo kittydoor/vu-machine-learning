@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 
-class SNN:
+class DirectNN:
 
     def __init__(self, in_layer_n, out_layer_n, eval_fn=None):
         """Initializes a shallow neural network 
