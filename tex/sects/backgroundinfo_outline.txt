@@ -14,7 +14,7 @@ network of neurons
 etc etc.
 
 >>Perceptron vs Neurons
->>>Sigmoid function 
+>>>Sigmoid function
 >>>Alternatives
 
 >>Concept of Layers
