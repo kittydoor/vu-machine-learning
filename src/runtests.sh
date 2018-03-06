@@ -1,1 +1,1 @@
-python3 *_test.py
+python3 -m unittest
