@@ -1,0 +1,13 @@
+Stupid Draft Version:
+Implement MNIST with Tensorflow
+Implement MNIST with our custom NN
+
+Actual Version:
+
+Implement evolutionary algorithm behaviour with current NN implementation
+
+Implement a snake game that can be hooked with the NN
+OR
+Figure out a better test case
+
+Implement TensorFlow to work with the aforementioned Snake game (or another test case) to have data to compare our implementation with
