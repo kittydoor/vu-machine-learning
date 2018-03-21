@@ -1,0 +1,102 @@
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\section{Theoretical background}
+
+\subsection{Neurons and the activation function}
+
+We identify a neuron with its \emph{activation} \(a\), which is computed from a weighted sum of activations of one or more other neurons:
+\begin{equation}\label{eq-weighted-sum}
+    a=f(z),\quad\text{with } z = \sum_j w_j a_j - \theta
+\end{equation}
+Here, \(w_j\) is the \emph{weight} of the connection from neuron \(a_j\) to \(a\), the quantity \(\theta\) is the neuron's \emph{threshold} and \(f\) is the \emph{activation function}. A basic activation function used by perceptrons is the binary step function, which is 1 when \(z\geq 0\), and 0 otherwise. 
+
+However, in order to use gradient descent, we need \(f\) to be differentiable. Although many alternatives exist \cite{ok}, we will use the sigmoid function \(\sigma\):
+\begin{equation*}
+    \sigma(z)=\frac{1}{1+e^{-z}}
+\end{equation*}
+
+\noindent This function is a popular choice because its derivative can easily be expressed in terms of the activation of a neuron:
+\begin{equation*}
+    \sigma'(z)=\sigma(z)\big(1-\sigma(z)\big)=a(1-a).
+\end{equation*}
+
+\subsection{Feed-forward network structure}
+
+The structure of a neural network is conveniently represented as a weighted directed graph. We consider \emph{feed-forward} networks, which are characterized by the absence of loops \cite{TODO}. Such a network consists of one or more layers, each containing a variable number of neurons, as well as a special \emph{input layer} providing activations for the first layer. 
+
+\vspace{16em} % Picture here?
+
+\noindent In a network with \(n\) layers, the activation of the $i$-th neuron in the $k$-th layer is denoted by \(a_i^k\). We define \(\theta_i^k\) and \(z_i^k\) analogously. In vector form, equation (\ref{eq-weighted-sum}) becomes
+\begin{equation*}
+    a^k=\sigma(\mathbf{w}^k a^{k-1}-\theta^k),
+\end{equation*}
+where \(\mathbf{w}^k=(w_{ij}^k)\) is the matrix whose element \(w_{ij}^k\) is the weight of the connection from neuron \(a_j^{k-1}\) to \(a_i^k\). 
+
+The last layer \(a^n\) is the \emph{output layer}; all other layers are \emph{hidden layers}. We will identify \(a^0\) with the values of the input layer, despite the fact that it does not consist of neurons; its activations are provided externally. 
+
+\subsection{Cost functions and performance}
+
+In order to quantify the performance of a neural network on an observation, i.e. a pair of input and output vectors \(x\) and \(y\) from the set \(S\) of training data, we measure the difference between the desired output \(y\) and the actual output \(a^n\) as a function of the input \(a^0=x\). This difference \(C_x\) is the \emph{cost} of an observation; the corresponding \emph{cost function} sums the costs over a large number of observations.  
+\begin{equation*}
+    C(\mathbf{w},\theta)=\sum_{(x,y)\in S} C_x(\mathbf{w}, \theta)
+\end{equation*}
+Here, we've highlighted the dependence of \(C\) on the parameters \(\mathbf{w}=(\mathbf{w}^1,\ldots,\mathbf{w}^n)\) and \(\theta=(\theta^1,\ldots,\theta^n)\). Our goal will be to minimize the cost function by adjusting the weights and thresholds, thereby improving the accuracy of the network.
+
+As with the activation function, many alternatives for \(C_x\) exist \cite{TODO}. We begin with the Mean Squared Error (MSE):
+\begin{equation*}
+    C_x= \norm{a^n(x) - y}^2.
+\end{equation*}
+(Add more things here about the cross-entropy cost function)
+
+\subsection{Gradient descent}
+
+Gradient descent is an iterative optimization algorithm that uses the gradient (\ref{eq-gradient}) of a multivariate function \(f:\mathbb{R}^n\to\mathbb{R}\) to traverse its domain in the direction of steepest descent. In theory, the function value at the current position should steadily decrease at each iteration until a local minimum is reached \cite{TODO}. 
+\begin{equation}\label{eq-gradient}
+    \nabla f(x_1,\ldots,x_n) = \bigg(\frac{\partial f}{\partial x_1},\ldots,\frac{\partial f}{\partial x_n} \bigg)
+\end{equation}
+To train a neural network, we use the gradient vector of the cost function \(C\) with respect to \(\mathbf{w}\) and \(\theta\) to make small adjustments to these parameters proportional to a \emph{learning rate} \(\eta\):
+\begin{equation*}
+    (\Delta\mathbf{w},\Delta\theta) = -\eta \nabla C(\mathbf{w},\theta)
+\end{equation*}
+Clearly, the learning rate has a significant effect on the performance of the algorithm. If \(\eta\) is too small, then progress will be slow. On the other hand, a learning rate that is too large may lead to oscillations, or even make the algorithm overshoot features of the function. Choosing an appropriate learning rate is a difficult issue, since the cost function of a neural network is generally complex and hard to predict. The most basic approach is to use a fixed learning rate, which in practice must be fine-tuned repeatedly until it provides satisfying results. More sophisticated methods attempt to mitigate these issues by adding a momentum term \cite{TODO}, or adapting the learning rate based on the observed behavior of the cost function \cite{TODO}. 
+
+
+(... Talk about other potential problems with this approach: vanishing gradient problem ...)
+
+\subsubsection{Stochastic gradient descent}
+
+\noindent Since \(C\) is a sum of costs of all training data in \(S\), determining the gradient of \(C\) requires computing the gradient for each term \(C_x\) separately, which can be prohibitively expensive when the number of observations is very large:
+\begin{equation*}
+    (\Delta\mathbf{w},\Delta\theta) = \sum_{(x,y)\in S} -\eta\nabla C_x\mathbf{w},\theta)
+\end{equation*}
+However, a considerable speed-up can be achieved by using the gradient of costs of a randomly sampled subset of \(S\) as an estimator for \(\nabla C\). This technique is known as stochastic gradient descent. In practice, \(S\) is divided up into \(n\) batches \(S_1,\ldots,S_n\). (...)
+
+
+\subsection{Backpropagation}
+
+Computing the gradient \(\nabla C_x\) of the cost of a single observation involves repeated application of the chain rule, since in general the relationship between a parameter and the cost is a deeply nested function. 
+\vspace{15em} (Picture?)
+
+\noindent Backpropagation is a dynamic programming algorithm that reduces the required number of calculations dramatically. To achieve this, it reuses partial derivatives by passing them backwards through the network, hence the name. We define the \emph{local error}
+\begin{equation}
+    \delta^k = \frac{\partial C_x}{\partial z^k},
+\end{equation}
+which is used to compute the partial derivatives with respect to the parameters at layer \(k\):
+\begin{equation}
+    \frac{\partial C_x}{\partial \theta_j^k} =\frac{\partial C_x}{\partial z^k}\frac{\partial z^k}{\partial \theta_j^k}=\delta^k
+\end{equation}
+\begin{equation}
+    \frac{\partial C_x}{\partial w_{ij}^k} = \frac{\partial C_x}{\partial z^k}\frac{\partial z^k}{\partial w_{ij}^k}=\delta^k a_i^{k-1}
+\end{equation}
+Most importantly, we can derive a recursive relationship between \(\delta^k\) and \(\delta^{k-1}\) as follows:
+\begin{equation*}
+    \frac{\partial C_x}{\partial z_j^{k-1}}=\frac{\partial C_x}{\partial z^k}\frac{\partial z^k}{\partial a_j^{k-1}}\frac{\partial a_j^{k-1}}{\partial z_j^{k-1}}=(\delta^k\cdot \mathbf{w}_{*,j}^k)\  \sigma'(z_j^{k-1}).
+\end{equation*}
+The formula above suggests the more concise notation
+\begin{equation}
+    \delta^{k-1}=(\delta^k\mathbf{w}^k)^T\odot \sigma'(z^{k-1}),
+\end{equation}
+where \(\odot\) denotes the Hadamard product for pointwise vector multiplication.
+
+(... Here comes some more talk about how this relates to the specific cost function we chose ...)
+\subsection{Regularization}
