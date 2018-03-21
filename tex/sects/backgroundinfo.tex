@@ -1,45 +1,55 @@
 \section{Background Info}
 
-Machine Learning is a branch of Artificial intelligence based on the idea that systems can learn from data, identify patterns and make decisions using those patterns.
-Machine Learning uses algorithms to "learn" from a given  (training) sample of data.
-Then you use another sample (test sample) to determine the accuracy of the trained algorithms.
-The higher the accuracy, the better the model will preform to more and more real life data.
+\noindent Machine Learning is a branch of Artificial intelligence based on the idea that systems can learn from data, identify patterns and make decisions using those patterns.
+Machine Learning uses algorithms to "learn" from a given (training) sample of data.
+These algorithms are programmed, but use the training samples to create their own set of algorithms to learn from the data.
+When the program has finished learning from the training sample you use another sample (test sample) to determine the accuracy of the trained algorithms.
+The program then tests their own created programs with the new sample and tries to makes decisions as to what is in the sample test sample.
+For example, we give the program a large training data set with pictures of men and women.
+After the program is done learning, we give it the test data set and see, based on the patterns it has learned, how accurate our program predicted whether the persons in the new pictures were men or women.
+From the amount it guest correctly, we determine it's accuracy (i.e. an accuracy of 98\% if it guessed 98\% correctly).
+The higher the accuracy, the better the algorithm will preform to more and more real life data.\\
 
+\noindent Machine learning has many different branches, all based on different methods and algorithms.
 One branch of Machine Learning (ML) is the Neural Networks (NN).
 Neural networks are biologically inspired ML programs.
 They are modelled after the neurons in the brains of animals.
+Figure \ref{fig: Neural network} shows an illustration of a Neural Network.
+Neural Networks have been used since 1943 and are still used quite often.
 As to how the NN works, a neuron (artificial though) receives the inputs and starts some operations on the input.
 Next, the neuron sends the output to the other neurons (they have to be connected).
 This system has three layers: Input Layer, Hidden Layers, and Output Layer.
 In the first layer the training observations are given to the neurons.
 In the Hidden Layers, which are located between input- and output layers, the system tries to analysis the relationships involved in data.
-In these layers system will weight the nodes that are found to be more predictive of the outcome more heavily.
+In these layers system will weight the nodes that are found to be more predictive of the outcome more heavily.\\
 
-There are many types of Neural Networks.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.25\textwidth]{sects/300px-Colored_neural_network.png}
+    \caption{Neural Network graphical example}
+    \label{fig: Neural network}
+\end{figure}
+
+\\
+
+\noindent There are also different strategies for learning when it comes to Neural Networks.
+The first one is supervised learning.
+This is a basic 'test and adjust strategy'.
+You use a training to train the program, test it for it's accuracy, and then train it again until you've got the desirable model gained by the trained program.
+The second is unsupervised learning.
+This method is used for unlabeled data sets.
+It uses the given training data and models the underlying structure of the data in order to learn more about the data itself.
+The third method is reinforced learning.
+This method allows the program and its user to learn its behavior on feedback from the environment. \\
+
+\noident There are many types of Neural Networks.
 One specific type is the Perceptron.
-It is a mathematical model of the biological neuron.
+It is a mathematical model of the biological neuron and is the simplest neural network possible.
+A Perceptron follows a feed-forward model (described in section \ref{...}).
 This model uses an algorithm for binary classifiers, as well as a type of linear classifier (it makes it's prediction based on a linear model, combining a set of weights with the feature vector).
 Normal Perceptrons use linear activation functions.
-When they use three or more layers, the Perceptrion is called a Multilayer Perceptron (MLP).
+When they use three or more layers, the Perceptron is called a Multilayer Perceptron (MLP).
 In this case, each node is a neuron that uses nonlinear activation functions.
-The MLP uses the technique backpropogation for training,
+The MLP uses the backpropogation technique for training.
 This technique calculates the gradient that is needed to calculate the weights which are used in the network.
 The nonlinear activation functions in MLP usually follow the shape of the sigmoid function.
-This is a mathematical function (logistical) with an "S" shaped curve, which has the following formulation:
-
-\begin{equation*}
-  \centering
-  S(x)=\frac{1}{1+e^{-x}}
-\end{equation*}
-
-
-Mean Squared Error measures the average of squares of the errors.
-The errors are defined as the difference between the real value of data points and the estimated value.
-This measurement shows the quality of the regression.
-Still there are many others measurements which can be used for quality of the regression and the estimated values.
-Mean Percentage Error,  Mean Absolute Percentage Error and Root Mean Squared Error are some of the other common quality-measurements.
-Let $\hat(Y)$ be a vector of $n$ predictions, and $Y$ is the vector of real values then the MSE is as follows:
-
-\begin{equation*}
-  MSE= \frac{1}{n} \sum_{i=1}^{n}(Y_{i}-\hat{Y}_{i})^{2}
-\end{equation*}
