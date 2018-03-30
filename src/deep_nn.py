@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 # Documentation soon...
 # Next steps: - Implement concurrency for speed-up
@@ -14,12 +15,12 @@ class DeepNN:
         sizes -- list of ints, defines network topology
         """
         self.sizes = sizes
-        
+
         # network weights, defined as random
         self.w = [np.random.randn(i, j) for i, j in zip(sizes[1:], sizes[:-1])]
 
         # network biases, defined as random
-        self.b = [np.random.randn(k) for k in sizes[1:]]
+        self.b = [np.random.randn(k, 1) for k in sizes[1:]]
 
     @staticmethod
     def sigmoid(z):
@@ -33,11 +34,11 @@ class DeepNN:
     def feedforward(self, a):
         """Feedforward takes an input matrix and feeds it through the network
         to get a resulting matrix of the size of the output layer
-        
+
         a -- data matrix in the size of the input layer
         """
         for w, b in zip(self.w, self.b):
-            a = DeepNN.sigmoid(w.dot(a) + b)
+            a = DeepNN.sigmoid(w @ a + b)
         return a
 
     def sgd(self, training_data, epochs, batch_size, eta, test_data=None):
@@ -68,7 +69,7 @@ class DeepNN:
     def process_batch(self, batch, eta):
         """Process batch takes a batch of data, and uses gradient descent in order
         to learn from the data and improve the weights and biases
-        
+
         batch -- list of input and desired output tuples
         eta -- learning rate
         """
@@ -91,8 +92,9 @@ class DeepNN:
         """
         activations = [x]
         for w, b in zip(self.w, self.b):
-            activations = [*activations,  DeepNN.sigmoid(w.dot(activations[-1]) + b)]
+            activations.append(DeepNN.sigmoid(w @ activations[-1] + b))
 
+        #print(activations)
         delta = [(activations[-1] - y) * activations[-1] * (1 - activations[-1])]
         for w, a in zip(reversed(self.w), reversed(activations[:-1])):
             delta = [np.transpose(w).dot(delta[0]) * a * (1 - a), *delta]
@@ -103,4 +105,6 @@ class DeepNN:
         """Loss function returns the error rate of the network
         given some test data
         """
-        return sum(sum((self.feedforward(x) - y) ** 2) for (x, y) in test_data)
+        #return sum(sum((self.feedforward(x) - y) ** 2) for (x, y) in test_data)
+        test_results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
+        return sum(int(x == y) for (x, y) in test_results)
